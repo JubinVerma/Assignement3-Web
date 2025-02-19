@@ -1,26 +1,29 @@
 {
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
   "routes": [
     {
-      "src": "/media/(.*)",
-      "dest": "/public/media/$1"
-    },
-    {
-      "src": "/images/(.*)",
-      "dest": "/public/images/$1"
+      "src": "/(.*)",
+      "dest": "/server.js"
     }
   ],
   "headers": [
     {
       "source": "/media/(.*)",
       "headers": [
-        { "key": "Content-Type", "value": "video/mp4" }
-      ]
-    },
-    {
-      "source": "/images/(.*)",
-      "headers": [
-        { "key": "Content-Type", "value": "image/png" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     }
-  ]
+  ],
+  "staticFiles": {
+    "public": "public"
+  }
 }
