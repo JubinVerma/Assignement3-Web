@@ -8,19 +8,19 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/server.js"
-    }
-  ],
-  "headers": [
+      "src": "/public/media/(.*)",
+      "dest": "/public/media/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
     {
-      "source": "/media/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
+      "src": "/public/(.*)",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/"
     }
   ]
 }
