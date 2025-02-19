@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Solutions</title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar bg-base-100 p-4 shadow-lg">
+        <div class="flex-1">
+            <a href="/" class="text-xl font-bold">Climate Solutions</a>
+        </div>
+        <div class="flex-none">
+            <a href="/about" class="btn btn-ghost">About</a>
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost">Sector</label>
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="/solutions/projects?sector=agriculture">Agriculture</a></li>
+                    <li><a href="/solutions/projects?sector=Electricity">Electricity</a></li>
+                    <li><a href="/solutions/projects?sector=transportation">Transportation</a></li>
+                    <li><a href="/solutions/projects?sector=Test">Test</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto p-6">
+        <div class="hero bg-base-200 p-10 rounded-lg">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold">Explore Climate Solutions</h1>
+                <p class="py-4">Discover projects that aim to make a sustainable future.</p>
+                <a href="/solutions/projects" class="btn btn-primary">View Projects</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
