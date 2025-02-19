@@ -1,23 +1,26 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "public/css/main.css",
-      "use": "@vercel/static"
-    }
-  ],
   "routes": [
     {
-      "src": "/css/(.*)",
-      "dest": "/public/css/$1"
+      "src": "/media/(.*)",
+      "dest": "/public/media/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "server.js"
+      "src": "/images/(.*)",
+      "dest": "/public/images/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/media/(.*)",
+      "headers": [
+        { "key": "Content-Type", "value": "video/mp4" }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        { "key": "Content-Type", "value": "image/png" }
+      ]
     }
   ]
 }
