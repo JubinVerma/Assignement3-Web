@@ -8,20 +8,12 @@
     {
       "src": "public/css/main.css",
       "use": "@vercel/static"
-    },
-    {
-      "src": "public/media/(.*)",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/css/(.*)",
       "dest": "/public/css/$1"
-    },
-    {
-      "src": "/media/(.*)",
-      "dest": "/public/media/$1"
     },
     {
       "src": "/(.*)",

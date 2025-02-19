@@ -4,25 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Page Not Found</title>
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
-    <nav class="navbar bg-base-100 p-4 shadow-lg w-full">
-        <div class="flex-1">
-            <a href="/" class="text-xl font-bold">Climate Solutions</a>
-        </div>
-        <div class="flex-none">
-            <a class="active" href="/about" class="btn btn-ghost active">About</a>
-        </div>
+<body class="bg-gray-900 min-h-screen flex flex-col text-white">
+
+    <!-- Navbar -->
+    <nav class="bg-gray-800 p-4 shadow-lg w-full flex items-center">
+        <a href="/" class="text-xl font-bold text-white flex-1">Climate Solutions</a>
+        <a href="/about" class="btn btn-ghost text-white">About</a>
     </nav>
-    <div class="container mx-auto p-6 flex flex-col items-center justify-center rounded-xl border-2 border-gray-300">
-        <div class="hero bg-base-200 p-10 rounded-xl text-center">
-            <h1 class="text-4xl font-bold">Oops! That Page does not exist </h1>
+
+    <!-- Main Content -->
+    <div class="flex flex-col items-center justify-center flex-grow p-6">
+        <div class="bg-gray-700 p-6 rounded-xl text-center shadow-md w-full max-w-md">
+            <h1 class="text-3xl font-bold text-white">Oops! That Page does not exist</h1>
         </div>
-        <div class="flex flex-col items-center justify-center mt-6">
-            <img src="../media/error.jpg" alt="404 Not Found" style="display: block; margin: 0 auto; width: 500px; height: 300px; border-radius: 20px;" >
-            <a href="/" class="btn btn-primary mt-4">Go Back Home</a>
-        </div>
+        
+        <!-- Smaller Image -->
+        <img src="../media/error.jpg" alt="404 Not Found"
+        class="mt-6 rounded-md shadow-md object-cover"
+        style="width: 50%; height: 40%;">
+    
+        
+        <a href="/" class="btn btn-primary mt-6">Go Back Home</a>
     </div>
+
 </body>
 </html>
