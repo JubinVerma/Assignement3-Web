@@ -19,6 +19,8 @@ const port = 3000;
 // Middleware to serve static files from "public" folder
 app.use(express.static("public"));
 
+app.set("views", __dirname + "/views");
+app.use(express.static(__dirname + "/public"));
 
 projectData.initialize().then(() => {
     app.listen(port, () => {
