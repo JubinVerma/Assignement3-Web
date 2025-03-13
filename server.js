@@ -1,13 +1,12 @@
 /********************************************************************************
-* WEB322 – Assignment 03
+* WEB322 – Assignment 04
 *
 * I declare that this assignment is my own work in accordance with Seneca's
 * Academic Integrity Policy:
 *
 * https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
 *
-* Name: JUBIN VERMA Student ID: 153629233 Date: 18/02/2025
-*
+* Name: JUBIN VERMA Student ID: 153629233 Date: 12/03/2025
 ********************************************************************************/
 
 const express = require('express');
@@ -16,11 +15,25 @@ const projectData = require('./modules/projects');
 const app = express();
 const port = 3000;
 
-// Middleware to serve static files from "public" folder
-app.use(express.static("public"));
+async function findSector(value) {
+  let sector = [];
+  sector = await projectData.getProjectsBySector(value);
 
+  return sector;
+}
+
+async function getID(id) {
+  let project = [];
+  project = await projectData.getProjectByID(id);
+  return project;
+}
+
+
+app.use(express.static("public"));
+app.set('view engine', 'ejs'); 
 app.set("views", __dirname + "/views");
 app.use(express.static(__dirname + "/public"));
+
 
 projectData.initialize().then(() => {
     app.listen(port, () => {
@@ -32,38 +45,49 @@ projectData.initialize().then(() => {
 
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "views", "home.html"));
+    res.render("home", {showSearchBar: true});
 });
 
 
 app.get("/about", (req, res) => {
-    res.sendFile(path.join(__dirname, "views", "about.html"));
+    res.render("about", {showSearchBar: false});
 });
 
 
-app.get("/solutions/projects", (req, res) => {
-    const sector = req.query.sector;
-    if (sector) {
-        projectData.getProjectBySector(sector)
-            .then(projects => res.json(projects))
-            .catch(err => res.status(404).send(err));
-    } else {
-        projectData.getAllProjects()
-            .then(projects => res.json(projects))
-            .catch(err => res.status(500).send(err));
+app.get("/solutions/projects", async (req, res) => {
+    let projects = await projectData.getAllProjects();
+let { sector } = req.query;
+
+  if (sector) {
+    findSector(sector)
+      .then((data) => {
+        res.render("projects", {projects:data, showSearchBar:true});
+      })
+      .catch(() => {
+        res.status(404).render("404", {message: `No projects found for sector: ${sector}`, showSearchBar:false});
+      });
+  } else {
+    res.render("projects", {projects: projects, showSearchBar: true});
+  }
+});
+
+
+app.get("/solutions/projects/:id", async (req, res) => {
+    let { id } = req.params;
+    if (id) {
+      getID(id)
+        .then((data) => {
+          res.render("project", {project:data, showSearchBar:false});
+        })
+        .catch(() => {
+          res.status(404).render("404", {message: "Unable to find request project.", showSearchBar:false});
+        });
     }
-});
-
-
-app.get("/solutions/projects/:id", (req, res) => {
-    const projectId = req.params.id;
-    projectData.getProjectById(projectId)  
-        .then(project => res.json(project))
-        .catch(err => res.status(404).send(err));
 });
 
 
 
 app.use((req, res) => {
-    res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
+    res.status(404).render("404", {message: "I'm sorry, we're unable to find what you're looking for", showSearchBar:false});
 });
+
